@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Skrining Dini Risiko Hipertensi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="{{ url_for('static', filename='LogoUmi.png') }}" class="logo">
+        <div class="nav-text">
+            <span class="univ-name">Universitas Muslim Indonesia</span>
+            <span class="nav-title">Skrining Hipertensi</span>
+        </div>
+    </div>
+
+    <div class="nav-right" id="navMenu">
+        <a href="#beranda">Beranda</a>
+        <a href="/informasi">Pusat Informasi</a>
+        <a href="#skrining">Skrining</a>
+    </div>
+
+    <div class="nav-toggle" id="navToggle">☰</div>
+</nav>
+<section class="hero-modern" id="beranda">
+
+    <div class="hero-left card">
+        <span class="hero-badge">Sistem Skrining Kesehatan</span>
+
+        <h1>
+            Deteksi Dini Risiko<br>
+            <span class="highlight">Hipertensi</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Sistem skrining berbasis web untuk membantu masyarakat
+            mengenali risiko tekanan darah tinggi secara mandiri.
+        </p>
+
+        <ul class="hero-features">
+            <li>🩺 Skrining cepat & mandiri</li>
+            <li>📊 Klasifikasi sesuai standar</li>
+            <li>❤️ Edukasi pencegahan hipertensi</li>
+        </ul>
+
+        <div class="hero-actions">
+            <a href="#skrining" class="btn-primary">Mulai Skrining</a>
+            <a href="/informasi" class="btn-link">Pelajari Selengkapnya →</a>
+        </div>
+    </div>
+
+    <!-- VISUAL KANAN -->
+    <div class="hero-visual">
+        <div class="visual-card">
+            <div class="visual-icon">🩺</div>
+
+            <div class="visual-line"></div>
+
+            <div class="visual-text">
+                <strong>Skrining</strong>
+                <span>Tekanan Darah</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+<!-- ===== FORM ===== -->
+<section class="content" id="skrining">
+    <h3>Data Responden</h3>
+    <p>Isilah data berikut sesuai kondisi Anda.</p>
+<div class="info-mini">
+    <div class="info-item">
+        🕒 <strong>Waktu Pengisian:</strong> ± 3–5 menit
+    </div>
+    <div class="info-item">
+        🔒 <strong>Privasi Terjamin:</strong> Data hanya untuk skrining
+    </div>
+    <div class="info-item">
+        🩺 <strong>Bukan Diagnosis:</strong> Hanya skrining awal
+    </div>
+</div>
+
+    <form method="POST" action="/hasil" class="form-skrining">
+<!-- ===== GRID IDENTITAS & TD ===== -->
+<div class="form-grid">
+
+    <!-- A. IDENTITAS -->
+    <div class="form-column">
+        <h3 data-icon="🧾">A. Identitas Responden</h3>
+
+        <label>Nama</label>
+        <input type="text" name="nama" required>
+
+        <label>Umur</label>
+        <input type="number" name="umur" required>
+
+        <label>Jenis Kelamin</label>
+        <div class="radio-group horizontal">
+            <label><input type="radio" name="jk" value="Laki-laki" required><span>Laki-laki</span></label>
+            <label><input type="radio" name="jk" value="Perempuan"><span>Perempuan</span></label>
+        </div>
+
+        <label>Pendidikan Terakhir</label>
+        <div class="radio-group horizontal">
+            <label><input type="radio" name="pendidikan" value="SD" required><span>SD</span></label>
+            <label><input type="radio" name="pendidikan" value="SMP"><span>SMP</span></label>
+            <label><input type="radio" name="pendidikan" value="SMA"><span>SMA</span></label>
+            <label><input type="radio" name="pendidikan" value="Perguruan Tinggi"><span>Perguruan Tinggi</span></label>
+        </div>
+
+        <label>Pekerjaan</label>
+        <input type="text" name="pekerjaan">
+    </div>
+
+    <!-- B. TEKANAN DARAH -->
+    <div class="form-column">
+        <h3 data-icon="🩺">B. Data Tekanan Darah</h3>
+
+        <label>Sistolik (mmHg)</label>
+        <input type="number" name="sistolik" required>
+
+        <label>Diastolik (mmHg)</label>
+        <input type="number" name="diastolik" required>
+
+        <label>Apakah Anda Merokok?</label>
+        <div class="radio-group horizontal">
+            <label><input type="radio" name="merokok" value="Ya"><span>Ya</span></label>
+            <label><input type="radio" name="merokok" value="Tidak"><span>Tidak</span></label>
+        </div>
+    </div>
+
+</div>
+
+        <!-- C. PENGETAHUAN -->
+        <div class="form-section">
+            <h3 data-icon="📚">C. Pengetahuan Tentang Hipertensi</h3>
+
+            <label>1. Pernah mendengar tentang hipertensi?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="pengetahuan_1" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="pengetahuan_1" value="Tidak"><span>Tidak</span></label>
+            </div>
+
+            <label>2. Mengetahui batas normal tekanan darah?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="pengetahuan_2" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="pengetahuan_2" value="Tidak"><span>Tidak</span></label>
+            </div>
+
+            <label>3. Hipertensi selalu menimbulkan gejala?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="pengetahuan_3" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="pengetahuan_3" value="Tidak"><span>Tidak</span></label>
+            </div>
+        </div>
+
+        <!-- D. PERILAKU -->
+        <div class="form-section">
+            <h3 data-icon="🔍">D. Pengalaman & Perilaku</h3>
+
+            <label>4. Pernah memeriksakan tekanan darah?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="perilaku_1" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="perilaku_1" value="Tidak"><span>Tidak</span></label>
+            </div>
+
+            <label>5. Kapan terakhir memeriksakan tekanan darah?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="perilaku_2" value="1 bulan"><span>&lt; 1 bulan</span></label>
+                <label><input type="radio" name="perilaku_2" value="1-6 bulan"><span>1-6 bulan</span></label>
+                <label><input type="radio" name="perilaku_2" value="6-12 bulan"><span>6-12 bulan</span></label>
+                <label><input type="radio" name="perilaku_2" value=">1 tahun"><span>&gt; 1 tahun</span></label>
+            </div>
+
+            <label>6. Seberapa sering memeriksa tekanan darah?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="perilaku_3" value="Selalu"><span>Selalu</span></label>
+                <label><input type="radio" name="perilaku_3" value="Sering"><span>Sering</span></label>
+                <label><input type="radio" name="perilaku_3" value="Kadang-kadang"><span>Kadang-kadang</span></label>
+                <label><input type="radio" name="perilaku_3" value="Tidak Pernah"><span>Tidak Pernah</span></label>
+            </div>
+        </div>
+
+        <!-- E. SIKAP -->
+        <div class="form-section">
+            <h3 data-icon="❤️">E. Sikap Terhadap Skrining</h3>
+
+            <label>7. Skrining hipertensi penting untuk kesehatan</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="sikap_1" value="4"><span>Sangat Setuju</span></label>
+                <label><input type="radio" name="sikap_1" value="3"><span>Setuju</span></label>
+                <label><input type="radio" name="sikap_1" value="2"><span>Tidak Setuju</span></label>
+                <label><input type="radio" name="sikap_1" value="1"><span>Sangat Tidak Setuju</span></label>
+            </div>
+
+            <label>8. Bersedia melakukan pemeriksaan rutin</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="sikap_2" value="4"><span>Sangat Setuju</span></label>
+                <label><input type="radio" name="sikap_2" value="3"><span>Setuju</span></label>
+                <label><input type="radio" name="sikap_2" value="2"><span>Tidak Setuju</span></label>
+                <label><input type="radio" name="sikap_2" value="1"><span>Sangat Tidak Setuju</span></label>
+            </div>
+
+            <label>9. Pemeriksaan mudah diakses di tempat tinggal</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="sikap_3" value="4"><span>Sangat Setuju</span></label>
+                <label><input type="radio" name="sikap_3" value="3"><span>Setuju</span></label>
+                <label><input type="radio" name="sikap_3" value="2"><span>Tidak Setuju</span></label>
+                <label><input type="radio" name="sikap_3" value="1"><span>Sangat Tidak Setuju</span></label>
+            </div>
+        </div>
+
+        <!-- F. RIWAYAT -->
+        <div class="form-section">
+            <h3 data-icon="⚠️">F. Riwayat & Faktor Risiko</h3>
+
+            <label>10. Riwayat hipertensi dalam keluarga?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="riwayat_1" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="riwayat_1" value="Tidak"><span>Tidak</span></label>
+            </div>
+
+            <label>11. Pernah didiagnosis hipertensi?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="riwayat_2" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="riwayat_2" value="Tidak"><span>Tidak</span></label>
+            </div>
+
+            <label>12. Jika ya, rutin minum obat?</label>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="riwayat_3" value="Ya"><span>Ya</span></label>
+                <label><input type="radio" name="riwayat_3" value="Tidak"><span>Tidak</span></label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Lihat Hasil Skrining</button>
+    </form>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>
+        © 2025 Sistem Skrining Dini Hipertensi  
+        <br>
+        <span>Informasi bersifat edukatif, bukan diagnosis medis.</span>
+    </p>
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("navToggle");
+    const menu = document.getElementById("navMenu");
+
+    toggle.addEventListener("click", function () {
+        menu.classList.toggle("active");
+        toggle.classList.toggle("active");
+
+        // Ganti icon ☰ ↔ ✕
+        toggle.textContent = toggle.classList.contains("active") ? "✕" : "☰";
+    });
+});
+</script>
+
+</body>
+</html>

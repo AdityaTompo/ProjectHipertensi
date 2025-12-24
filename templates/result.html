@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Skrining Hipertensi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<section class="result-wrapper">
+
+    <!-- CARD UTAMA -->
+    <div class="result-card-main {{ kategori|lower|replace(' ', '-') }}">
+
+        <!-- HEADER -->
+        <div class="result-header">
+            <span class="header-icon">🩺</span>
+            <span>Hasil Skrining Dini Hipertensi</span>
+        </div>
+
+        <!-- STATUS -->
+        <div class="result-status">
+            <h1>{{ kategori }}</h1>
+            <span class="risk-level">Tingkat Risiko: {{ risiko }}</span>
+        </div>
+
+        <!-- TEKANAN DARAH -->
+        <div class="pressure-box">
+            <span class="pressure-value">{{ sistolik }}/{{ diastolik }}</span>
+            <span class="pressure-unit">mmHg</span>
+        </div>
+
+        <!-- IDENTITAS -->
+        <div class="result-meta">
+            <span>👤 {{ nama }}</span>
+            <span>🎂 {{ umur }} tahun</span>
+            <span>⚥ {{ jk }}</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SKOR -->
+        <div class="score-section">
+
+            <!-- PENGETAHUAN -->
+            <div class="score-item">
+                <span class="label">Pengetahuan</span>
+                <span class="score">{{ skor_pengetahuan }}/3</span>
+                <span class="category {{ kategori_pengetahuan|lower }}">
+                    {{ kategori_pengetahuan }}
+                </span>
+            </div>
+
+            <!-- SIKAP -->
+            <div class="score-item">
+                <span class="label">Sikap</span>
+                <span class="score">{{ skor_sikap }}/12</span>
+                <span class="category {{ kategori_sikap|lower }}">
+                    {{ kategori_sikap }}
+                </span>
+            </div>
+
+        </div>
+
+        <!-- SARAN -->
+        <div class="advice-box">
+            <span class="advice-icon">ℹ️</span>
+            <p>{{ saran_singkat }}</p>
+        </div>
+
+        <!-- ACTION -->
+        <div class="result-actions">
+            <a href="/edukasi/{{ kategori }}" class="btn-action primary">
+                📘 Lihat Edukasi
+            </a>
+
+            <a href="/" class="btn-action secondary">
+                🔄 Ulangi Skrining
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

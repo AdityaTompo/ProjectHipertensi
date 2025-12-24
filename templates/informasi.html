@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Informasi Hipertensi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ===== NAVBAR (PAKAI YANG SAMA DENGAN INDEX) ===== -->
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="{{ url_for('static', filename='LogoUmi.png') }}" class="logo">
+        <div class="nav-text">
+            <span class="univ-name">Universitas Muslim Indonesia</span>
+            <span class="nav-title">Skrining Hipertensi</span>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <a href="/">Beranda</a>
+        <a href="/informasi">Pusat Informasi</a>
+        <a href="/#skrining">Skrining</a>
+    </div>
+</nav>
+
+<!-- ===== PUSAT INFORMASI ===== -->
+<section class="info-section">
+    <div class="info-container card">
+
+        <header class="info-header">
+            <h1>Pusat Informasi Hipertensi</h1>
+            <p>
+                Halaman ini menyajikan informasi umum mengenai hipertensi
+                sebagai bentuk edukasi dan upaya pencegahan dini.
+            </p>
+        </header>
+
+       <!-- 1. PENGERTIAN -->
+<section class="info-card info">
+    <h2>
+        <span class="info-icon info">📌</span>
+        Apa itu Hipertensi?
+    </h2>
+    <p>
+        Hipertensi adalah kondisi meningkatnya tekanan darah di atas
+        batas normal secara terus-menerus. Seseorang dikatakan
+        mengalami hipertensi apabila tekanan darah sistolik
+        ≥ 140 mmHg dan/atau diastolik ≥ 90 mmHg.
+    </p>
+    <p>
+        Hipertensi sering disebut sebagai <em>silent killer</em>
+        karena pada tahap awal umumnya tidak menimbulkan gejala,
+        namun dapat meningkatkan risiko penyakit jantung, stroke,
+        dan gangguan ginjal.
+    </p>
+</section>
+
+<!-- 2. KLASIFIKASI -->
+<section class="info-card success">
+    <h2>
+        <span class="info-icon success">📊</span>
+        Klasifikasi Tekanan Darah
+    </h2>
+    <ul>
+        <li><strong>Normal:</strong> &lt; 120 / &lt; 80 mmHg</li>
+        <li><strong>Pra-Hipertensi:</strong> 120–139 / 80–89 mmHg</li>
+        <li><strong>Hipertensi:</strong> ≥ 140 / ≥ 90 mmHg</li>
+    </ul>
+</section>
+
+<!-- 3. FAKTOR RISIKO -->
+<section class="info-card danger">
+    <h2>
+        <span class="info-icon danger">⚠️</span>
+        Faktor Risiko Hipertensi
+    </h2>
+
+    <p><strong>Faktor yang tidak dapat diubah:</strong></p>
+    <ul>
+        <li>Usia</li>
+        <li>Riwayat hipertensi dalam keluarga</li>
+        <li>Jenis kelamin</li>
+    </ul>
+
+    <p><strong>Faktor yang dapat diubah:</strong></p>
+    <ul>
+        <li>Konsumsi garam berlebihan</li>
+        <li>Kurang aktivitas fisik</li>
+        <li>Kebiasaan merokok</li>
+        <li>Stres berkepanjangan</li>
+        <li>Pola makan yang tidak sehat</li>
+        <li>Kebiasaan merokok dan konsumsi alkohol</li>
+    </ul>
+</section>
+
+<!-- 4. GEJALA -->
+<section class="info-card warning">
+    <h2>
+        <span class="info-icon warning">🩺</span>
+        Gejala Hipertensi
+    </h2>
+    <p>
+        Pada banyak kasus, hipertensi tidak menimbulkan gejala yang
+        jelas. Namun, beberapa penderita dapat mengalami:
+    </p>
+    <ul>
+        <li>Sakit kepala</li>
+        <li>Pusing atau penglihatan kabur</li>
+        <li>Mudah lelah</li>
+        <li>Nyeri dada atau sesak napas (pada kondisi berat)</li>
+    </ul>
+    <p>
+        Oleh karena itu, pemeriksaan tekanan darah secara rutin
+        sangat dianjurkan meskipun tidak merasakan keluhan.
+    </p>
+</section>
+
+<!-- 5. PENCEGAHAN -->
+<section class="info-card success">
+    <h2>
+        <span class="info-icon success">❤️</span>
+        Pencegahan Hipertensi
+    </h2>
+    <ul>
+        <li>Mengurangi konsumsi garam</li>
+        <li>Mengonsumsi makanan bergizi seimbang</li>
+        <li>Melakukan aktivitas fisik secara teratur</li>
+        <li>Berhenti merokok</li>
+        <li>Mengelola stres dengan baik</li>
+        <li>Melakukan pemeriksaan tekanan darah berkala</li>
+    </ul>
+</section>
+
+<!-- 6. PENANGANAN -->
+<section class="info-card info">
+    <h2>
+        <span class="info-icon info">💊</span>
+        Penanganan Secara Umum
+    </h2>
+    <p>
+        Penanganan hipertensi meliputi perubahan gaya hidup sehat
+        dan, bila diperlukan, penggunaan obat sesuai anjuran tenaga
+        kesehatan. Penanganan yang tepat bergantung pada tingkat
+        risiko masing-masing individu.
+    </p>
+</section>
+
+<!-- 7. HUBUNGAN DENGAN SISTEM -->
+<section class="info-card info">
+    <h2>
+        <span class="info-icon info">🔍</span>
+        Hubungan dengan Sistem Skrining
+    </h2>
+    <p>
+        Sistem skrining hipertensi ini dirancang untuk membantu
+        pengguna melakukan pemeriksaan awal secara mandiri guna
+        mengetahui tingkat risiko hipertensi sebelum melakukan
+        pemeriksaan lanjutan ke tenaga kesehatan.
+    </p>
+</section>
+
+        <!-- NAVIGASI -->
+        <div class="info-actions">
+            <a href="/" class="btn-link">← Kembali ke Beranda</a>
+            <a href="/#skrining" class="btn-primary">Mulai Skrining</a>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

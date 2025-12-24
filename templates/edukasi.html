@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi Kesehatan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<section class="edukasi-wrapper">
+
+    <div class="edukasi-card {{ kategori|lower|replace(' ', '-') }}">
+
+        <!-- HEADER UTAMA -->
+        <div class="edukasi-header">
+            <span class="edukasi-icon">📘</span>
+            <span>Edukasi Kesehatan</span>
+        </div>
+
+        <!-- STATUS UTAMA -->
+        <div class="edukasi-title">
+            <h1>{{ kategori }}</h1>
+
+            <!-- STATUS RINGKAS (SATU-SATUNYA PENJELASAN) -->
+            <p class="status-ringkas">
+                {{ status_ringkas }}
+            </p>
+        </div>
+
+        <!-- SARAN / CHECKLIST -->
+        <div class="edukasi-list">
+            <h3>Yang Perlu Dilakukan:</h3>
+            <ul>
+                {% for item in daftar_saran %}
+                <li>✔ {{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- CATATAN MEDIS -->
+        <div class="edukasi-note">
+            <span>ℹ️</span>
+            <p>
+                Hasil ini bersifat skrining awal dan bukan diagnosis medis.
+                Untuk kepastian kondisi kesehatan, disarankan berkonsultasi
+                dengan tenaga kesehatan.
+            </p>
+        </div>
+
+        <!-- ACTION (SATU TOMBOL) -->
+        <div class="edukasi-actions">
+            <a href="/" class="btn-action secondary">
+                🏠 Kembali ke Beranda
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
