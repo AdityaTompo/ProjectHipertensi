@@ -3,23 +3,12 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="../templates", static_folder="../static")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
-with app.app_context():
-    try:
-        with db.engine.connect() as conn:
-            conn.execute(text("SELECT 1"))
-            print("✅ KONEKSI SUPABASE BERHASIL TOTAL")
-    except Exception as e:
-        print("❌ GAGAL KONEKSI SUPABASE")
-        print(e)
 
 
 # ======================================
@@ -233,7 +222,5 @@ def edukasi(kategori):
     )
 
 
-# ======================================
-# WAJIB UNTUK VERCEL
-# ======================================
-application = app
+# ⬇️ WAJIB UNTUK VERCEL
+app = app
