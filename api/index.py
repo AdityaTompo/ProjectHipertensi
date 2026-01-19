@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -48,7 +48,7 @@ def informasi():
 
 
 # ======================================
-# PROSES SKRINING & HASIL
+# PROSES SKRINING (POST ONLY)
 # ======================================
 @app.route('/hasil', methods=['POST'])
 def hasil():
@@ -142,21 +142,59 @@ def hasil():
     db.session.commit()
 
     # =========================
-    # RENDER HASIL
+    # REDIRECT KE HALAMAN GET
     # =========================
+    return redirect(url_for("result_page", id=data.id))
+
+
+# ======================================
+# HALAMAN HASIL (GET – AMAN)
+# ======================================
+@app.route("/result/<int:id>")
+def result_page(id):
+    data = Skrining.query.get_or_404(id)
+
+    kategori_pengetahuan = (
+        "Baik" if data.skor_pengetahuan == 3 else
+        "Sedang" if data.skor_pengetahuan == 2 else
+        "Rendah"
+    )
+
+    kategori_sikap = (
+        "Baik" if data.skor_sikap >= 10 else
+        "Cukup" if data.skor_sikap >= 7 else
+        "Kurang"
+    )
+
+    if data.kategori == "Hipertensi":
+        saran_singkat = (
+            "Tekanan darah Anda tergolong tinggi. "
+            "Disarankan untuk segera berkonsultasi dengan tenaga kesehatan."
+        )
+    elif data.kategori == "Pra-Hipertensi":
+        saran_singkat = (
+            "Tekanan darah Anda berada di atas normal. "
+            "Perubahan gaya hidup sehat sangat dianjurkan."
+        )
+    else:
+        saran_singkat = (
+            "Tekanan darah Anda berada dalam batas normal. "
+            "Pertahankan pola hidup sehat."
+        )
+
     return render_template(
         'result.html',
-        nama=nama,
-        umur=umur,
-        jk=jk,
-        sistolik=sistolik,
-        diastolik=diastolik,
-        kategori=kategori,
-        risiko=risiko,
+        nama=data.nama,
+        umur=data.umur,
+        jk=data.jenis_kelamin,
+        sistolik=data.sistolik,
+        diastolik=data.diastolik,
+        kategori=data.kategori,
+        risiko=data.risiko,
         saran_singkat=saran_singkat,
-        skor_pengetahuan=skor_pengetahuan,
+        skor_pengetahuan=data.skor_pengetahuan,
         kategori_pengetahuan=kategori_pengetahuan,
-        skor_sikap=skor_sikap,
+        skor_sikap=data.skor_sikap,
         kategori_sikap=kategori_sikap
     )
 
