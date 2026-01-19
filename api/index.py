@@ -1,30 +1,19 @@
 import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
-app = Flask(
-    __name__,
-    template_folder="../templates",
-    static_folder="../static"
-)
+app = Flask(__name__, template_folder="../templates", static_folder="../static")
 
-# ===============================
-# KONFIGURASI (AMAN UNTUK VERCEL)
-# ===============================
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "default-secret")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
-# ===============================
-# INISIALISASI DATABASE
-# ===============================
-db.init_app(app)
-
-# ===============================
+# ======================================
 # MODEL DATABASE
-# ===============================
+# ======================================
 class Skrining(db.Model):
     __tablename__ = "skrining"
 
@@ -40,23 +29,30 @@ class Skrining(db.Model):
     skor_sikap = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-# ===============================
-# ROUTES
-# ===============================
+# ======================================
+# HALAMAN UTAMA
+# ======================================
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# ======================================
+# HALAMAN INFORMASI
+# ======================================
 @app.route('/informasi')
 def informasi():
     return render_template('informasi.html')
 
+# ======================================
+# PROSES SKRINING & HASIL
+# ======================================
 @app.route('/hasil', methods=['POST'])
 def hasil():
     try:
         nama = request.form.get('nama', '').strip()
         umur = int(request.form.get('umur', 0))
         jk = request.form.get('jk', '-')
+
         sistolik = int(request.form.get('sistolik', 0))
         diastolik = int(request.form.get('diastolik', 0))
 
@@ -66,6 +62,9 @@ def hasil():
     except:
         return redirect('/')
 
+    # =========================
+    # KLASIFIKASI
+    # =========================
     if sistolik >= 140 or diastolik >= 90:
         kategori = "Hipertensi"
         risiko = "Tinggi"
@@ -88,6 +87,9 @@ def hasil():
             "Pertahankan pola hidup sehat."
         )
 
+    # =========================
+    # SKOR PENGETAHUAN
+    # =========================
     skor_pengetahuan = 0
     if request.form.get('pengetahuan_1') == "Ya":
         skor_pengetahuan += 1
@@ -102,6 +104,9 @@ def hasil():
         "Rendah"
     )
 
+    # =========================
+    # SKOR SIKAP
+    # =========================
     skor_sikap = (
         int(request.form.get('sikap_1', 0)) +
         int(request.form.get('sikap_2', 0)) +
@@ -114,6 +119,9 @@ def hasil():
         "Kurang"
     )
 
+    # =========================
+    # SIMPAN KE DATABASE
+    # =========================
     data = Skrining(
         nama=nama,
         umur=umur,
@@ -126,10 +134,12 @@ def hasil():
         skor_sikap=skor_sikap
     )
 
-    with app.app_context():
-        db.session.add(data)
-        db.session.commit()
+    db.session.add(data)
+    db.session.commit()
 
+    # =========================
+    # RENDER HASIL
+    # =========================
     return render_template(
         'result.html',
         nama=nama,
@@ -146,8 +156,12 @@ def hasil():
         kategori_sikap=kategori_sikap
     )
 
+# ======================================
+# HALAMAN EDUKASI
+# ======================================
 @app.route('/edukasi/<kategori>')
 def edukasi(kategori):
+
     kategori = kategori.lower()
 
     status_map = {
@@ -175,6 +189,7 @@ def edukasi(kategori):
             "Lakukan pemeriksaan tekanan darah secara rutin",
             "Konsultasikan dengan tenaga kesehatan"
         ]
+
     elif kategori == "pra-hipertensi":
         kategori_tampil = "Pra-Hipertensi"
         daftar_saran = [
@@ -184,6 +199,7 @@ def edukasi(kategori):
             "Lakukan olahraga ringan secara rutin",
             "Pantau tekanan darah secara berkala"
         ]
+
     else:
         kategori_tampil = "Normal"
         daftar_saran = [
@@ -201,5 +217,5 @@ def edukasi(kategori):
         daftar_saran=daftar_saran
     )
 
-# ⬇️ INI YANG WAJIB UNTUK VERCEL
-application = app
+# ⬇️ WAJIB UNTUK VERCEL
+app = app
